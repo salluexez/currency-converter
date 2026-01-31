@@ -7,6 +7,7 @@ class CurrencyViewModel extends ChangeNotifier {
 
   CurrencyModel? currencyModel;
   bool isLoading = false;
+  String? errorMessage;
 
   String fromCurrency = 'USD';
   String toCurrency = 'INR';
@@ -14,12 +15,18 @@ class CurrencyViewModel extends ChangeNotifier {
 
   Future<void> getRates() async {
     isLoading = true;
+    errorMessage = null;
     notifyListeners();
 
-    currencyModel = await _apiService.fetchRates(fromCurrency);
-
-    isLoading = false;
-    notifyListeners();
+    try {
+      currencyModel = await _apiService.fetchRates(fromCurrency);
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      isLoading = false;
+      errorMessage = 'Failed to load exchange rates. Please check your internet connection.';
+      notifyListeners();
+    }
   }
 
   void convert(double amount) {

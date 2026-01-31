@@ -1,3 +1,3 @@
 class AppConstants {
-  static const String baseUrl = 'http:api.extchange-api.com/v4/latest/';
+  static const String baseUrl = 'https://api.exchangerate-api.com/v4/latest/';
 }

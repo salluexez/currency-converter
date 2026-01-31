@@ -12,7 +12,7 @@ class ApiService {
     if (response.statusCode == 200) {
       return CurrencyModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to load the extchange rates');
+      throw Exception('Failed to load the exchange rates');
     }
   }
 }
